@@ -1,5 +1,7 @@
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -7,7 +9,62 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+	height: 100vh;
+	
+}
+
+.app {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.app .area {
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	width: 90%;
+	height: 90%;
+	overflow: hidden;
+}
+
+.area .dot {
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	border: 1px solid #222;
+}
+
+.app .containerButtons {
+	margin-bottom: 20px;
+}
+
+.containerButtons button {
+	padding: 5px 20px;
+	background-color: transparent;
+	border: 2px solid aqua;
+	border-radius: 7px;
+	cursor: pointer;
+	box-shadow: 0px 3px 5px #00000028;
+	transition: all 100ms ease;
+}
+
+.containerButtons button:hover {
+	background-color: #00ffff31;
+}
+
+.containerButtons button:active {
+	box-shadow: none;
+}
+
+.containerButtons .undo {
+	margin-right: 5px;
+}
+
+.containerButtons .redo {
+	margin-left: 5px;
 }
