@@ -11,9 +11,10 @@ function App() {
 		]
 
 		let hexadecimal = '';
-		for (let i = 0; i < 8; i++) {
-			let character = Math.floor(Math.random() * hexadecimalCharacters.length);
-			hexadecimal += hexadecimalCharacters[character];
+		const hexaDecimalLengh = 8;
+		for (let i = 0; i < hexaDecimalLengh; i++) {
+			let characterIndex = Math.floor(Math.random() * hexadecimalCharacters.length);
+			hexadecimal += hexadecimalCharacters[characterIndex];
 		}
 		return '#' + hexadecimal;
 	}
