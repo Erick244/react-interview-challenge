@@ -1,76 +1,33 @@
-import { useState } from "react";
-import { FaUndo, FaRedo } from "react-icons/fa";
+import { FaRedo, FaUndo } from "react-icons/fa";
+import { Button } from "./components/Button";
+import { DotsClickArea } from "./components/DotsClickArea";
+import { useDots } from "./hooks/useDots";
 
 function App() {
-	const [dots, setDots] = useState([]);
-	const [removedDots, setRemovedDots] = useState([]);
+    const { handlerClickArea, handlerClickRedo, handlerClickUndo, dots } =
+        useDots();
 
-	const genHexColor = () => {
-		const hexadecimalCharacters = [
-			'A', 'B', 'C', 'D', 'E', 'F', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
-		]
-
-		let hexadecimal = '';
-		for (let i = 0; i < 8; i++) {
-			let character = Math.floor(Math.random() * hexadecimalCharacters.length);
-			hexadecimal += hexadecimalCharacters[character];
-		}
-		return '#' + hexadecimal;
-	}
-
-	const handlerClickArea = (e) => {
-		const date = new Date();
-		const key = date.getMilliseconds() * date.getSeconds();
-		const newDot = (
-			<span
-				key={key}
-				style={{
-					top: `${e.clientY}px`,
-					left: `${e.clientX}px`,
-					backgroundColor: `${genHexColor()}`
-				}}
-				className="dot">
-			</span>
-		)
-
-		setDots([...dots, newDot]);
-	}
-
-	const handlerClickUndo = (e) => {
-		if (dots.length <= 0) return;
-		const dotsClone = [...dots];
-		const undoDot = dotsClone.pop();
-		setRemovedDots([...removedDots, undoDot]);
-		setDots(dotsClone);
-	}
-
-	const handlerClickRedo = (e) => {
-		if (removedDots.length <= 0) return;
-		const removedDotsClone = [...removedDots];
-		const redoDot = removedDotsClone.pop();
-		setRemovedDots(removedDotsClone);
-		setDots([...dots, redoDot]);
-	}
-
-	return (
-		<div className="app">
-			<div className="containerButtons">
-				<button
-					className="undo"
-					onClick={handlerClickUndo}>
-					{<FaUndo />}
-				</button>
-				<button
-					className="redo"
-					onClick={handlerClickRedo}>
-					{<FaRedo />}
-				</button>
-			</div>
-			<div className="area" onClick={handlerClickArea}>
-				{dots}
-			</div>
-		</div>
-	)
+    return (
+        <div className="app">
+            <div className="containerButtons">
+                <Button
+                    icon={<FaUndo />}
+                    className="undo"
+                    onClick={handlerClickUndo}
+                />
+                <Button
+                    icon={<FaRedo />}
+                    className="redo"
+                    onClick={handlerClickRedo}
+                />
+            </div>
+            <DotsClickArea
+                dots={dots}
+                className="area"
+                onClick={handlerClickArea}
+            />
+        </div>
+    );
 }
 
 export default App;
